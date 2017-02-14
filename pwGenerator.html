@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>Generate Passwords</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+        <link rel="stylesheet" href="./../../node_modules/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="./../../node_modules/bootstrap/dist/css/bootstrap-theme.min.css" type="text/css" />
+
+        <script type="text/javascript" src="./../../node_modules/vue/dist/vue.js"></script>
+        <script type="text/javascript" src="./../../node_modules/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="./../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <!--Header-->
+                    <div class="col-md-12">
+                        <h3 class="text-center">
+                            Generate Passwords
+                            <br>
+                            <label>Test {{nachricht}}</label>
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!--Options-->
+                    <div class="col-md-3">
+                        <div class="checkbox disabled">
+                            <label><input type="checkbox" checked disabled>lowerCase <b>always true</b></label>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" v-model="pw.upperCase">upperCase</label> <b>{{ pw.upperCase }}</b>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" v-model="pw.numeric">numeric</label> <b>{{ pw.numeric }}</b>
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" v-model="pw.symbolic">symbolic</label> <b>{{ pw.symbolic }}</b>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <select v-if="pw.symbolic" v-model="pw.selectedSymbols" multiple style='height: 150px;'>
+                            <option v-for="item in pw.allowedSymbols">{{item}}</option>
+                        </select>
+                        <p></p>
+                    </div>
+                    <div class="col-md-7">
+                        <span v-if="pw.symbolic">Selected: {{ pw.selectedSymbols.length }} / {{ pw.allowedSymbols.length }}</span>
+                        <p></p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!--Length-->
+                    <div class="col-md-12">
+                        <label for="length">length: {{pw.length}}</label>
+                        <input id="length" type="range" min="8" max="100" v-model="pw.length">
+                        <p></p>
+                        <p></p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!--Generate-->
+                    <div class="col-md-12">
+                        <button @click="GeneratePW" type="button" class="btn btn-primary btn-block">
+                        Generate PW
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <script type="text/javascript" src="./../../sites/pwGenerator/pwGenerator.js"></script>
+    </body>
+
+</html>
